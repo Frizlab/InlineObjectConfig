@@ -21,6 +21,10 @@ public func --?<T>(_ objectCreator: @autoclosure () throws -> T?, _ modifierBloc
 }
 
 
+/* *** async variants *** */
+/* Note: While this looks cool in theory, in practice an async autoclosure does seem to be supported (yet?) in Swift.
+ * Related: <https://forums.swift.org/t/47614>. */
+
 public func --<T>(_ objectCreator: @autoclosure () async throws -> T, _ modifierBlock: (inout T) async throws -> Void) async rethrows -> T {
 	var res = try await objectCreator()
 	try await modifierBlock(&res)
